@@ -11,7 +11,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-      imports: [SharedModule, RouterTestingModule.withRoutes(routes)]
+      imports: [SharedModule, RouterTestingModule]
     }).compileComponents();
   }));
 

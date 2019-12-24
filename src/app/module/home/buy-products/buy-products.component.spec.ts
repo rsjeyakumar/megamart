@@ -1,22 +1,30 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { BuyProductsComponent } from './buy-products.component';
 import { SharedModule } from '../../../shared/shared.module';
-import { LandingComponent } from './landing.component';
 import { RouterTestingModule } from '@angular/router/testing';
 
-describe('LandingComponent', () => {
-  let component: LandingComponent;
-  let fixture: ComponentFixture<LandingComponent>;
+describe('BuyProductsComponent', () => {
+  let component: BuyProductsComponent;
+  let fixture: ComponentFixture<BuyProductsComponent>;
 
   beforeEach(async(() => {
+    const user = {
+      userId: 1,
+      emailId: 'vishali@gmail.com',
+      userName: 'Vishali',
+      loginType: 'CreditCard'
+    };
+    sessionStorage.setItem('user', JSON.stringify(user));
     TestBed.configureTestingModule({
-      declarations: [LandingComponent],
+      declarations: [BuyProductsComponent],
       imports: [SharedModule, RouterTestingModule]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LandingComponent);
+    fixture = TestBed.createComponent(BuyProductsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

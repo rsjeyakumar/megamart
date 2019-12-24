@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
 
@@ -9,30 +9,65 @@ import { environment } from '../../../environments/environment';
 })
 export class HttpService {
   apiUrl = environment.apiUrl;
+  megaMart = environment.megaMart;
+
+
   userDetails = 'user';
   constructor(private http: HttpClient) {
-
+    //this.apiUrl = this.maintiainPayee;
   }
 
-  // httpHeaders = {
-  //   headers: new HttpHeaders({
-  //     'content-type': 'application/json'
-  //   })
-  // };
+  httpHeaders = {
+    headers: new HttpHeaders({
+      'content-type': 'application/json'
+    })
+  };
 
-
-  createData(url, body) {
+  /* POST API logic is done by using createData method and it takes  */
+  createData(endpoints, body) {
+    const url = environment.apiUrl + endpoints;
     return this.http.post(url, body);
   }
 
-  readData(url) {
+  /* GET API logic is done by using createData method and it takes  */
+  readData(endpoints) {
+    const url = environment.apiUrl + endpoints;
     return this.http.get(url);
   }
-  updateData() {
 
+  /* UPDATE API logic is done by using createData method and it takes  */
+  updateData(endpoints, body) {
+    const url = environment.apiUrl + endpoints;
+    return this.http.put(url, body);
   }
 
+  /* Delete API logic is done by using createData method and it takes  */
   delteData() { }
+
+  /* POST API logic is done by using createData method and it takes  */
+  megacreateData(endpoints, body) {
+    const url = this.megaMart + endpoints;
+    return this.http.post(url, body);
+  }
+
+  /* GET API logic is done by using createData method and it takes  */
+  megareadData(endpoints) {
+    const url = this.megaMart + endpoints;
+    return this.http.get(url);
+  }
+
+  /* UPDATE API logic is done by using createData method and it takes  */
+  megaupdateData(endpoints, body) {
+    const url = this.megaMart + endpoints;
+    return this.http.put(url, body);
+  }
+
+  /* Delete API logic is done by using createData method and it takes  */
+  payeedelteData(endpoints) {
+    const url = this.megaMart + endpoints;
+    return this.http.delete(url);
+
+  }
 
 
 

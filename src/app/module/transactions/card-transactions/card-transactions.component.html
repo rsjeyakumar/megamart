@@ -1,0 +1,80 @@
+<!-- transaction template -->
+<div class="container shadow transaction my-5 py-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 my-4">
+                    <h2>My Transaction</h2>
+                </div>
+                <div class="col-4">
+                    <p><b>Account holder Name:</b><span> {{montholyRespose?.holderName}}</span></p>
+                </div>
+                <div class="col-4">
+                    <p><b>Card Number:</b><span> {{montholyRespose?.cardNumber}}</span></p>
+                </div>
+                <div class="col-4 text-right">
+                    <p><b>Availabe Credit Limit:</b><span> {{montholyRespose?.availableAmount}}</span></p>
+                </div>
+                <div class="col-6 text-right mx-auto my-3">
+                    <form #form="ngForm" (submit)="filterTransaction(form.value)">
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="exampleFormControlSelect1">Month:</label>
+                                <select class="form-control rounded-0" [(ngModel)]="selectedMonth" name="month"
+                                    id="exampleFormControlSelect1">
+                                    <option *ngFor="let month of months;let i=index" [selected]="i" [value]="i">
+                                        {{month}}</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="exampleFormControlSelect1">Year:</label>
+                                <select class="form-control rounded-0" [(ngModel)]="selectedYear" name="year"
+                                    id="exampleFormControlSelect1">
+                                    <option *ngFor="let year of years;" [selected]="year" [value]="year">
+                                        {{year}}</option>
+                                </select>
+
+                            </div>
+                            <div class="col text-left align-self-end">
+                                <button class="btn btn-primary">View</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-9 mx-auto">
+
+            <div class="row bg-dark p-3">
+                <div class="col text-white text-center">
+                    Transaction Date
+                </div>
+                <div class="col text-white text-center">
+                    Description
+                </div>
+                <div class="col text-white text-center">
+                    Transaction Amount
+                </div>
+            </div>
+            <div class="row p-3 my-2 border border-dark bus-body"
+                *ngFor="let transaction of montholyRespose?.transactions; let i=index;let odd=odd; let even=even;">
+                <div class="col">
+                    <p class="text-center"> {{transaction?.transactionDate  | date:'dd-MM-yyyy'}}</p>
+                </div>
+                <div class="col">
+                    <p class="text-center"> {{transaction?.description}}</p>
+                </div>
+                <div class="col">
+                    <p class="text-center">&#8377; {{transaction?.transactionAmount  }}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

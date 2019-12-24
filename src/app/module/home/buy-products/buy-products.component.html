@@ -1,0 +1,126 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <!-- form card login -->
+                <div class="col-12  p-3 m-3">
+                    <h2 class="text-center">Buy Product</h2>
+                </div>
+                <div class="col-12 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            Product Details
+                        </div>
+                        <div class="card-body">
+                            <h3>{{product?.productName}}</h3>
+                            <img [src]="product?.image" class="card-img-top" alt="...">
+
+                            <p class="text-center card-text"><i> {{product?.description}}</i></p>
+
+                        </div>
+                        <div class="card-footer text-muted">
+                            <p> &#8377; {{product?.priceValue}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row py-5">
+                        <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto">
+                            <div id="pay-invoice" class="card">
+                                <div class="card-body">
+                                    <div class="card-title">
+                                        <h3 class="text-center">Payments</h3>
+                                    </div>
+                                    <hr>
+                                    <form [formGroup]="cardDetails" class="needs-validation" *ngIf="showCard">
+                                        <div class="form-group has-success">
+                                            <label for="cc-name" class="control-label mb-1">Card holder name<span
+                                                    class="text-danger">*</span></label>
+                                            <input formControlName="holderName" id="cc-name" name="cc-name" type="text"
+                                                class="form-control cc-name"
+                                                [ngClass]="{'is-invalid': cardDetails?.controls?.holderName?.touched && cardDetails?.controls?.holderName?.invalid}"
+                                                required autocomplete="cc-name" aria-required="true"
+                                                aria-invalid="false" aria-describedby="cc-name-error">
+                                            <span class="invalid-feedback">Enter the name as shown on credit card</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cc-number" class="control-label mb-1">Card number<span
+                                                    class="text-danger">*</span></label>
+                                            <input formControlName="cardNumber" id="cc-number" name="cc-number"
+                                                type="tel"
+                                                [ngClass]="{'is-invalid': cardDetails?.controls?.cardNumber?.touched && cardDetails?.controls?.cardNumber?.invalid}"
+                                                class="form-control cc-number identified visa" required=""
+                                                pattern="[0-9]{9}">
+                                            <span class="invalid-feedback">Enter a valid 8 digit card number</span>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="x_card_code" class="control-label mb-1">CVV<span
+                                                            class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <input formControlName="cvv" id="x_card_code" name="x_card_code"
+                                                            type="tel" class="form-control cc-cvc" required
+                                                            autocomplete="off" pattern="[0-9]{3}">
+                                                        <span class="invalid-feedback order-last">Enter the 3-digit code
+                                                            on
+                                                            back</span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="cc-exp" class="control-label mb-1">Expiry Date<span
+                                                            class="text-danger">*</span></label>
+                                                    <p-calendar styleClass="prime-calendar form-control"
+                                                        formControlName="validTo" view="month" dateFormat="mm/yy"
+                                                        [yearNavigator]="true" yearRange="2020:2030"
+                                                        [readonlyInput]="true"></p-calendar>
+                                                    <span class="invalid-feedback">Enter the valid to date</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <button id="payment-button" [disabled]="cardDetails.invalid"
+                                                (click)="cardSubmit()" class="btn btn-lg btn-info btn-block">
+                                                <i class="fa fa-lock fa-lg"></i>&nbsp;
+                                                <span id="payment-button-amount">Pay &#8377;
+                                                    {{product?.priceValue}}</span>
+                                                <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                    <div class="form-row my-4" *ngIf="!showCard">
+                                        <div class="form-group">
+                                            <p class="text-center text-success"
+                                                *ngIf="buyproductResponse?.statusCode== '201'">
+                                                {{buyproductResponse?.message}}</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <p class="text-center text-success" *ngIf="product?.statusCode== '200'">
+                                                {{product?.message}}</p>
+                                        </div>
+                                        <div class="form-group col-12">
+                                            <label for="pwd1">Enter OTP<span class="text-danger">*</span></label>
+                                            <input type="text" [(ngModel)]="OTP"
+                                                class="form-control form-control-lg rounded-0" id="pwd1"
+                                                autocomplete="new-password">
+                                            <div class="invalid-feedback">
+                                                <span *ngIf="cardDetails?.controls?.password?.errors?.required">Please
+                                                    enter correct Password.</span> </div>
+                                        </div>
+                                        <!-- [ngClass]="{'is-invalid': cardDetails?.controls?.password?.touched && cardDetails?.controls?.password?.invalid}" -->
+                                        <div class="form-group col-12">
+                                            <button class="btn btn-info btn-block" (click)="enterOtp()">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

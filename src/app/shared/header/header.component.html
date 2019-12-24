@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg d-none navbar-light" [ngClass]="{'bg-white shadow d-flex': suserDetails}">
-    <a class="navbar-brand" href="#">My App</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow d-flex fixed-top">
+    <a class="navbar-brand" href="#">Mega Market</a>
     <button class="navbar-toggler" type="button" (click)="toggleNavbar()" data-toggle="collapse"
         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -7,17 +7,36 @@
     </button>
     <div class="collapse navbar-collapse" [ngClass]="{'show': showMobileMenu}" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#"><i class="fa fa-home" aria-hidden="true"></i>Home <span
+            <li class="nav-item " routerLinkActive="active">
+                <a class="nav-link" [routerLink]="['/products']"><i class="fa fa-home" aria-hidden="true"></i>Home <span
                         class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fa fa-bell-o" aria-hidden="true"></i><span
-                        class="rounded-circle alerts"><span class="numberofalerts">2</span></span>Alerts</a>
+            <li class="nav-item " routerLinkActive="active" *ngIf="suserDetails?.loginType == 'MegaMarket' ">
+                <a class="nav-link" [routerLink]="['/myorders']"><i class="fa fa-first-order"
+                        aria-hidden="true"></i>View My
+                    Orders <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item " routerLinkActive="active" *ngIf="suserDetails?.loginType == 'CreditCard' ">
+                <a class="nav-link" [routerLink]="['/transaction']"><i class="fa fa-list-ol" aria-hidden="true"></i>My
+                    Transaction<span class="sr-only">(current)</span></a>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="#"> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span
+                        class="rounded-circle alerts"><span class="numberofalerts">2</span></span>Cart</a>
+            </li> -->
+            <li class="nav-item" *ngIf="suserDetails">
                 <a class="nav-link" href="javascript:void(0)" (click)="op.toggle($event)"> <i
                         class="fa fa-user-circle fa-2" aria-hidden="true"></i>Profile</a>
+            </li>
+            <li class="nav-item" *ngIf="!suserDetails" routerLinkActive="active">
+                <a class="nav-link" href="javascript:void(0)" [routerLink]="['/login']"
+                    [queryParams]="{type: 'ecommerce'}"> <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                    E-commerce Login</a>
+            </li>
+            <li class="nav-item" *ngIf="!suserDetails" routerLinkActive="active">
+                <a class="nav-link" href="javascript:void(0)" [routerLink]="['/login']"
+                    [queryParams]="{type: 'creditcard'}"> <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                    Apply Credit Card</a>
             </li>
         </ul>
     </div>
@@ -25,7 +44,7 @@
 
 <p-overlayPanel #op>
     <a class="dropdown-item" href="javascript:void()">You Signed in as</a>
-    <a class="dropdown-item" href="javascript:void()"><b>{{suserDetails?.username}}</b></a>
+    <a class="dropdown-item" href="javascript:void()"><b>{{suserDetails?.userName}}</b></a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="javascript:void(0)" (click)="logOut()">LogOut</a>
 </p-overlayPanel>

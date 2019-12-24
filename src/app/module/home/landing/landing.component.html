@@ -1,13 +1,55 @@
-<div class="container">
+<div class="container my-5">
     <div class="row">
-        <div class="col-sm">
-            One of three columns
+        <div class="col-md-12">
+            <div class="row">
+                <!-- form card login -->
+                <div class="col-12  p-3 m-3">
+                    <h2 class="text-center">Premium Products</h2>
+                </div>
+                <div class="col-12 mx-auto">
+                    <div class="col-12  p-3 m-3">
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="exampleFormControlSelect1">Search Product:</label>
+                                <input type="text" name="" id="exampleFormControlSelect1" [(ngModel)]="product"
+                                    class="form-control">
+                            </div>
+                            <div class="col text-left align-self-end">
+                                <button class="btn btn-primary" (click)="searchProduct(product)">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  h-100">
+                        <div class="card p-3 m-1" style="width: 17rem;" *ngFor="let item of productList">
+                            <img [src]="item?.image" class="card-img-top" alt="...">
+                            <div class="card-body p-0">
+                                <h5 class="card-title text-primary text-center">{{item.productName}}</h5>
+                                <p class="text-center"><i>{{item.description}}</i></p>
+                                <p class="text-center"><i> &#8377; {{item.priceValue}}</i></p>
+                                <a href="javascript:void(0)" class="align-bottom"
+                                    [routerLink]="['/products',item.productId]" class="btn btn-primary btn-block">Buy
+                                    Product</a>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+                    <!-- /form card login -->
+
+                </div>
+
+
+            </div>
+            <!--/row-->
+
         </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
+        <!--/col-->
+
     </div>
+    <!--/row-->
+
 </div>
+<!--/container-->
